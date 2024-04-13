@@ -1,23 +1,23 @@
 [
   {
     "id": 1,
-    "title": "Music Near Me",
     "body": "A mobile app that will send you notifications whenever a concert is playing in your area.",
-    "date_created": "2024-01-01",
-    "user_id": 1
+    "date_created": "2024-01-15",
+    "user_id": 3,
+    "post_id": 1
   },
   {
     "id": 2,
-    "title": "The Ultimate Tech Quiz",
     "body": "A web app that will give users 10 new technical questions each day and track their progress in things like programming, cybersecurity, database architecture, and more!",
-    "date_created": "2024-02-01",
-    "user_id": 1
+    "date_created": "2024-02-15",
+    "user_id": 3,
+    "post_id": 1
   },
   {
     "id": 3,
-    "title": "Roll 'Em Up",
     "body": "A game for Windows and macOS where players move a ball through a series of increasingly challenging mazes.",
-    "date_created": "2024-03-01",
-    "user_id": 2
+    "date_created": "2024-02-25",
+    "user_id": 3,
+    "post_id": 2
   }
 ]
