@@ -16,10 +16,10 @@
           <a href='/'>The Tech Blog!</a>
         </h1>
         <nav>
+          <a href='/'>Home</a>
           <a href='/dashboard'>Dashboard</a>
           <!-- Conditionally render login or logout links -->
           {{#if logged_in}}
-            <a href='/profile'>profile</a>
             |
             <button class='no-button' id='logout'>logout</button>
           {{else}}
