@@ -57,50 +57,26 @@ router.get('/dashboard', auth, async (req, res) => {
   }
 });
 
-/*
-router.get('/post/:id', async (req, res) => {
+// Get a single post
+router.get('/posts/:id', auth, async (req, res) => {
   try {
-    const projectData = await Project.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ['name'],
-        },
-      ],
+    const postData = await Post.findByPk(req.params.id, {
+      include: [{ model: User, attributes: ['name'] }],
     });
+
+    if (postData.user_id !== req.session.user_id) {
+      res.status(403).send('Unauthorized to access this post');
+      return;
+    }
 
     const post = postData.get({ plain: true });
 
-    res.render('post', {
-      ...post,
-      logged_in: req.session.logged_in
-    });
-  } catch (err) {
-    res.status(500).json(err);
+    res.render('detail', { post, logged_in: req.session.logged_in });
+  } catch (error) {
+    console.error('Failed to retrieve post:', error);
+    res.status(500).send('Error loading post details.');
   }
 });
-*/
-
-// Use withAuth middleware to prevent access to route
-// router.get('/profile', async (req, res) => {
-// try {
-//   // Find the logged in user based on the session ID
-//   const userData = await User.findByPk(req.session.user_id, {
-//     attributes: { exclude: ['password'] },
-//     include: [{ model: Post }],
-//   });
-
-//   const user = userData.get({ plain: true });
-
-//   res.render('profile', {
-//     ...user,
-//     logged_in: true,
-//   });
-// } catch (err) {
-//   res.status(500).json(err);
-// }
-//   res.render('profile');
-// });
 
 // If the user is already logged in, redirect the user to the homepage
 router.get('/login', (req, res) => {
