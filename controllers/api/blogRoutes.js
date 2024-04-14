@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post } = require('../../models');
+const { Post, Comment } = require('../../models');
 const auth = require('../../utils/auth');
 
 // CREATE a new post
@@ -42,7 +42,7 @@ router.put('/:id', auth, async (req, res) => {
 });
 
 // Delete a post
-router.post('/:id', auth, async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
   try {
     const postData = await Post.destroy({
       where: {
@@ -50,7 +50,6 @@ router.post('/:id', auth, async (req, res) => {
         user_id: req.session.user_id,
       },
     });
-
     if (postData) {
       res.status(200).json(postData);
     } else {
@@ -59,6 +58,23 @@ router.post('/:id', auth, async (req, res) => {
   } catch (error) {
     console.error('Failed to delete post:', error);
     res.status(500).send('Error deleting post.');
+  }
+});
+
+// Create a new comment
+router.post('/comments', auth, async (req, res) => {
+  console.log('Creating comment:', req.body);
+  try {
+    const newComment = await Comment.create({
+      body: req.body.commentBody,
+      post_id: req.body.postId,
+      user_id: req.session.user_id,
+    });
+
+    res.redirect(`/posts/${req.body.postId}`);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).send('Failed to create comment');
   }
 });
 
