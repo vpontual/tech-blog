@@ -1,0 +1,27 @@
+<h1>{{post.title}}</h1>
+<p>{{post.body}}</p>
+<p>{{post.user.name}}</p>
+<p>{{format_date post.date_created}}</p>
+<h2>Comments:</h2>
+{{#each post.comments}}
+  <div>
+    <p>{{this.body}} - <em>{{this.user.name}}</em></p>
+    <p>{{format_date this.date_created}}</p>
+  </div>
+{{else}}
+  <p>No comments yet.</p>
+{{/each}}
+
+{{#if logged_in}}
+  <form action='/api/posts/comments' method='POST'>
+    <input type='hidden' name='postId' value='{{post.id}}' />
+    <textarea
+      name='commentBody'
+      required
+      placeholder='Add a comment...'
+    ></textarea>
+    <button type='submit'>Submit Comment</button>
+  </form>
+{{else}}
+  <p><a href='/login'>Log in</a> to comment.</p>
+{{/if}}

@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
   deleteButton.addEventListener('click', function () {
     const postId = this.dataset.postid;
     fetch(`/api/posts/${postId}`, {
-      method: 'DELETE', // Using DELETE for removal
+      method: 'DELETE',
     }).then((response) => {
       if (response.ok) {
         window.location.href = '/dashboard';
