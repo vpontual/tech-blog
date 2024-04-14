@@ -32,33 +32,26 @@ router.get('/', async (req, res) => {
 // Dashboard Route
 router.get('/dashboard', auth, async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
     const userPosts = await Post.findAll({
       where: { user_id: req.session.user_id },
-      include: [
-        {
-          model: User,
-          attributes: ['name'],
-        },
-      ],
+      include: [{ model: User, attributes: ['name'] }],
       order: [['date_created', 'DESC']],
     });
 
-    // Serialize data so the template can read it
     const posts = userPosts.map((post) => post.get({ plain: true }));
 
-    // Pass serialized data and session flag into template
     res.render('dashboard', {
       posts,
       logged_in: req.session.logged_in,
     });
   } catch (error) {
+    console.error('Failed to retrieve user posts:', error);
     res.status(500).send('Error loading the dashboard.');
   }
 });
 
-// Get a single post
-router.get('/posts/:id', auth, async (req, res) => {
+// Dashboard Detail Route
+router.get('/dashboard/:id', auth, async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
       include: [{ model: User, attributes: ['name'] }],
@@ -71,7 +64,50 @@ router.get('/posts/:id', auth, async (req, res) => {
 
     const post = postData.get({ plain: true });
 
-    res.render('detail', { post, logged_in: req.session.logged_in });
+    res.render('dashboardDetail', {
+      post,
+      logged_in: req.session.logged_in,
+    });
+  } catch (error) {
+    console.error('Failed to retrieve post:', error);
+    res.status(500).send('Error loading post details.');
+  }
+});
+
+// Get the new post page
+router.get('/posts/new', (req, res) => {
+  // Ensure the user is logged in
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+  } else {
+    res.render('newPost');
+  }
+});
+
+// Get the edit post page
+router.get('/posts/:id', async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: Comment,
+          include: [{ model: User, attributes: ['name'] }],
+        },
+        {
+          model: User,
+          attributes: ['name'],
+        },
+      ],
+    });
+
+    if (!postData) {
+      res.status(404).send('Post not found');
+      return;
+    }
+
+    const post = postData.get({ plain: true });
+    //console.log(JSON.stringify(post, null, 2));
+    res.render('homepageDetail', { post, logged_in: req.session.logged_in });
   } catch (error) {
     console.error('Failed to retrieve post:', error);
     res.status(500).send('Error loading post details.');

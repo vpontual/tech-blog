@@ -42,7 +42,7 @@ router.put('/:id', auth, async (req, res) => {
 });
 
 // Delete a post
-router.post('/:id/delete', auth, async (req, res) => {
+router.post('/:id', auth, async (req, res) => {
   try {
     const postData = await Post.destroy({
       where: {
@@ -52,7 +52,7 @@ router.post('/:id/delete', auth, async (req, res) => {
     });
 
     if (postData) {
-      res.redirect('/dashboard');
+      res.status(200).json(postData);
     } else {
       res.status(404).send('Post not found');
     }
