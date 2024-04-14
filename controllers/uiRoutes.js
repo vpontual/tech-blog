@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
 });
 
 // Dashboard Route
-router.get('/dashboard', async (req, res) => {
+router.get('/dashboard', auth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
     const userPosts = await Post.findAll({
@@ -53,8 +53,7 @@ router.get('/dashboard', async (req, res) => {
       logged_in: req.session.logged_in,
     });
   } catch (error) {
-    // res.status(500).send('Error loading the dashboard.');
-    res.render('login');
+    res.status(500).send('Error loading the dashboard.');
   }
 });
 
