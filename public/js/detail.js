@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
   updateForm.addEventListener('submit', function (event) {
     event.preventDefault();
     const formData = new FormData(this);
-    fetch(`/api/posts/${formData.get('postId')}/update`, {
+    fetch(`/api/posts/${formData.get('postId')}`, {
       method: 'PUT', // Using PUT for update
       body: JSON.stringify({
         title: formData.get('title'),

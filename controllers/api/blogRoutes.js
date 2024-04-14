@@ -17,50 +17,27 @@ router.post('/', auth, async (req, res) => {
 });
 
 // Update a post
-// router.put('/:id/update', auth, async (req, res) => {
-//   try {
-//     const { title, body } = req.body;
-//     const postData = await Post.update(
-//       { title, body },
-//       {
-//         where: {
-//           id: req.params.id,
-//           user_id: req.session.user_id,
-//         },
-//       },
-//     );
-
-//     if (postData) {
-//       res.redirect('/dashboard');
-//     } else {
-//       res.status(404).send('Post not found');
-//     }
-//   } catch (error) {
-//     console.error('Failed to update post:', error);
-//     res.status(500).send('Error updating post.');
-//   }
-// });
-
-router.put('/:id/update', auth, async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
   try {
     const { title, body } = req.body;
-    const [updatedRows] = await Post.update(
+    const postData = await Post.update(
       { title, body },
       {
-        where: { id: req.params.id, user_id: req.session.user_id },
-        returning: true, // For Postgres, to get the updated row
+        where: {
+          id: req.params.id,
+          user_id: req.session.user_id,
+        },
       },
     );
 
-    if (updatedRows) {
-      // Send a success response with the updated post data
-      res.status(200).json(updatedRows[0]);
+    if (postData) {
+      res.status(200).json(postData);
     } else {
-      res.status(404).json({ error: 'Post not found' });
+      res.status(404).send('Post not found');
     }
   } catch (error) {
     console.error('Failed to update post:', error);
-    res.status(500).json({ error: 'Error updating post.' });
+    res.status(500).send('Error updating post.');
   }
 });
 
