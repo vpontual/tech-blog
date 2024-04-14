@@ -2,9 +2,10 @@ const router = require('express').Router();
 const { Post, User } = require('../models');
 const auth = require('../utils/auth');
 
+// GET all posts for homepage
 router.get('/', async (req, res) => {
   try {
-    // Get all projects and JOIN with user data
+    // Get all posts and JOIN with user data
     const postData = await Post.findAll({
       include: [
         {
@@ -12,6 +13,7 @@ router.get('/', async (req, res) => {
           attributes: ['name'],
         },
       ],
+      order: [['date_created', 'DESC']],
     });
 
     // Serialize data so the template can read it
