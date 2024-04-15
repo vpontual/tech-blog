@@ -1,10 +1,12 @@
-<h1>{{post.title}}</h1>
-<p>{{post.body}}</p>
-<p>{{post.user.name}}</p>
-<p>{{format_date post.date_created}}</p>
+<div class='post'>
+  <h1>{{post.title}}</h1>
+  <p>{{post.body}}</p>
+  <p>{{post.user.name}}</p>
+  <p>{{format_date post.date_created}}</p>
+</div>
 <h2>Comments:</h2>
 {{#each post.comments}}
-  <div>
+  <div class='comment'>
     <p>{{this.body}} - <em>{{this.user.name}}</em></p>
     <p>{{format_date this.date_created}}</p>
   </div>

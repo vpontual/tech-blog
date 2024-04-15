@@ -1,57 +1,132 @@
-header,
-.project:not(:last-child) {
-  border-bottom: 1px solid #ccc;
-}
-
-.no-button {
-  background: none;
-  border: none;
+/* General Body and Typography Styles */
+html,
+body {
+  height: 100%;
+  margin: 0;
   padding: 0;
-  cursor: pointer;
-  color: #1b89bc;
-  text-decoration: none;
-  font-size: 100%;
 }
 
-.no-button:hover {
-  color: #065b83;
-  text-decoration: underline;
-}
-
-.dollar-amount {
-  color: #056605;
-  font-weight: bold;
-  margin-left: -5px;
-}
-
-header nav a,
-header nav button {
-  font-size: 1.2rem;
-}
-
-.nav-links {
-  margin-left: -10px;
-}
-
-.card {
-  margin-bottom: 20px;
-  margin-left: -10px;
-  width: 100%;
-}
-
-.post-card-container {
+body {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 80%;
-  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
+  background-color: #1c1c1c;
+  color: #e0e0e0;
 }
 
-.card-title a {
-  font-size: 1.5rem;
+h1,
+h2,
+h3 {
+  color: #f0f0f0;
+  text-decoration: none;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+/* Navigation and Header Styles */
+header,
+footer {
+  background-color: #2c2c2c;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+  padding: 1px;
+  text-align: center;
+}
+
+header a,
+footer a,
+.footer {
+  color: #9acd32;
+  text-decoration: none;
   font-weight: bold;
 }
 
-.card-text.mb-0 {
-  margin-bottom: 0;
+header a:hover,
+footer a:hover {
+  color: #7cb342;
+}
+
+a {
+  color: #f0f0f0;
+  text-decoration: none;
+}
+
+/* Main Content Layout */
+main {
+  flex: 1;
+  width: 85%;
+  margin: 20px auto;
+  background: transparent;
+  padding: 20px;
+}
+
+/* Post and Comment Cards */
+.post,
+.comment {
+  background-color: #333333;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-left: 4px solid #9acd32;
+}
+
+.post h3,
+.comment h4 {
+  color: #e0e0e0;
+  text-decoration: none;
+}
+
+/* Buttons */
+button,
+input[type='submit'] {
+  background-color: #9acd32;
+  border: none;
+  color: #1c1c1c;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+button:hover,
+input[type='submit']:hover {
+  background-color: #7cb342;
+}
+
+/* Forms */
+input[type='text'],
+input[type='password'],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #4d4d4d;
+  background-color: #1c1c1c;
+  color: #e0e0e0;
+}
+
+/* Footer Styles */
+footer {
+  color: #e0e0e0;
+  background-color: #2c2c2c;
+  text-align: center;
+  padding: 10px;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+/* Utility Classes */
+.hidden {
+  display: none;
+}
+
+.clearfix::after {
+  content: '';
+  clear: both;
+  display: table;
 }
