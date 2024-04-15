@@ -3,8 +3,8 @@ version: '3.8'
 services:
   web:
     image: rpontual/tech-blog:latest
-    #command: ["npm", "run", "seed"]
-    command: ['npm', 'run', 'start']
+    command: ['npm', 'run', 'seed']
+    #command: ['npm', 'run', 'start']
     depends_on:
       - db
     ports:
