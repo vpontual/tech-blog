@@ -58,13 +58,19 @@ THEN I am able to view posts and comments but I am prompted to log in again befo
 
 Homepage:
 
+![screenshot of the homepage](./assets/home.png)
+
 Dashboard:
 
-Login:
+![screenshot of the homepage](./assets/dashboard.png)
 
 ## Live Site
 
 The live Tech Blog can be found here:
+
+Render (slow to load): https://tech-blog-o267.onrender.com
+
+Self-hosted (fast to load):https://techblog.vitorpontual.com/
 
 ## Initial User Flow Design
 
